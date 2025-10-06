@@ -1,6 +1,7 @@
 import pytest
 import allure
 from pages.main_page import MainPage
+from locators.main_page_locators import MainPageLocators
 
 
 class TestMainFunctionality:
@@ -38,6 +39,13 @@ class TestMainFunctionality:
         main_page.close_modal()
         assert not main_page.is_modal_visible()
 
-
-    
+    @allure.feature('Основной функционал')
+    @allure.story('Увеличение счетчика ингредиента')
+    def test_ingredient_counter_increase(self, driver):
+        main_page = MainPage(driver)
+        main_page.go_to_site()
+        initial_count = main_page.get_ingredient_counter(0)
+        main_page.drag_ingredient_to_basket(0)
+        new_count = main_page.get_ingredient_counter(0)
+        assert new_count > initial_count
 
