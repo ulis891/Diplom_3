@@ -1,5 +1,6 @@
 from .base_page import BasePage
 from locators.main_page_locators import MainPageLocators
+from selenium.webdriver.common.action_chains import ActionChains
 
 
 class MainPage(BasePage):
@@ -43,3 +44,11 @@ class MainPage(BasePage):
         if counters:
             return int(counters[0].text)
         return 0
+
+    def drag_ingredient_to_basket(self, index=6):
+        ingredients = self.find_elements(MainPageLocators.INGREDIENT_ITEM)
+        basket = self.find_element(MainPageLocators.ORDER_BASKET)
+        action = ActionChains(self.driver)
+        # action.click_and_hold(ingredients[index]).move_to_element(basket).release().perform()
+        action.drag_and_drop(ingredients[index], basket).perform()
+
