@@ -20,4 +20,4 @@ class MainPageLocators:
 
     MODAL = (By.XPATH, "//div[contains(@class, 'Modal_modal')]")
     MODAL_CLOSE_BUTTON = (By.XPATH, "//button[contains(@class, 'Modal_close')]")
-    INGREDIENT_DETAILS = (By.XPATH, "//div[contains(@class, 'Modal_modal')]//h3[text()='Детали ингредиента']")
+    INGREDIENT_DETAILS = (By.XPATH, "//h2[text()='Детали ингредиента']")
