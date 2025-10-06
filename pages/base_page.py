@@ -31,3 +31,7 @@ class BasePage:
 
     def wait_for_element_visible(self, locator):
         return WebDriverWait(self.driver, self.time).until(EC.visibility_of_element_located(locator))
+
+    def wait_for_element_not_visible(self, locator):
+        return WebDriverWait(self.driver, self.time).until(EC.invisibility_of_element_located(locator))
+

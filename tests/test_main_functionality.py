@@ -1,0 +1,43 @@
+import pytest
+import allure
+from pages.main_page import MainPage
+
+
+class TestMainFunctionality:
+    @allure.feature('Основной функционал')
+    @allure.story('Переход в конструктор')
+    def test_go_to_constructor(self, driver):
+        main_page = MainPage(driver)
+        main_page.go_to_site()
+        main_page.click_constructor_button()
+        assert driver.current_url == main_page.base_url + "/"
+
+    @allure.feature('Основной функционал')
+    @allure.story('Переход в ленту заказов')
+    def test_go_to_order_feed(self, driver):
+        main_page = MainPage(driver)
+        main_page.go_to_site()
+        main_page.click_order_feed_button()
+        assert "feed" in driver.current_url
+
+    @allure.feature('Основной функционал')
+    @allure.story('Открытие деталей ингредиента')
+    def test_ingredient_details_modal(self, driver):
+        main_page = MainPage(driver)
+        main_page.go_to_site()
+        main_page.click_ingredient(0)
+        assert main_page.is_modal_visible()
+        assert (main_page.is_ingredient_details_visible())
+
+    @allure.feature('Основной функционал')
+    @allure.story('Открытие деталей ингредиента')
+    def test_close_modal(self, driver):
+        main_page = MainPage(driver)
+        main_page.go_to_site()
+        main_page.click_ingredient(0)
+        main_page.close_modal()
+        assert not main_page.is_modal_visible()
+
+
+    
+
