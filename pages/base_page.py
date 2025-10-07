@@ -9,7 +9,6 @@ class BasePage:
         self.time = 10
         self.login_url = f'{self.base_url}/login'
 
-
     def go_to_site(self):
         return self.driver.get(self.base_url)
 
