@@ -2,30 +2,29 @@ from locators.main_page_locators import MainPageLocators
 from selenium.webdriver.common.action_chains import ActionChains
 from time import sleep
 from .base_page import BasePage
+import allure
 
 
 class MainPage(BasePage):
+    @allure.step("Клик на кнопку входа")
     def click_login_button(self):
         self.click_element(MainPageLocators.LOGIN_BUTTON)
 
+    @allure.step("Клик на кнопку личного кабинета")
     def click_personal_account_button(self):
         self.click_element(MainPageLocators.PERSONAL_ACCOUNT_BUTTON)
-
+    @allure.step("Клик на кнопку конструктора")
     def click_constructor_button(self):
         self.click_element(MainPageLocators.CONSTRUCTOR_BUTTON)
 
+    @allure.step("Клик на кнопку заказов")
     def click_order_feed_button(self):
         self.click_element(MainPageLocators.ORDER_FEED_BUTTON)
 
+    @allure.step("Клик на ингредиент")
     def click_ingredient(self, index=0):
         ingredients = self.find_elements(MainPageLocators.INGREDIENT_ITEM)
         ingredients[index].click()
-
-    def close_modal(self):
-        # self.is_modal_visible()
-        sleep(2)
-        self.click_element(MainPageLocators.MODAL_CLOSE_BUTTON)
-        self.wait_for_element_not_visible(MainPageLocators.MODAL_CLOSE_BUTTON)
 
     def is_modal_visible(self):
         try:
@@ -34,6 +33,13 @@ class MainPage(BasePage):
         except:
             return False
 
+    @allure.step("Клик на кнопку закрытия модального окна")
+    def close_modal(self):
+        sleep(2)
+        self.click_element(MainPageLocators.MODAL_CLOSE_BUTTON)
+        self.wait_for_element_not_visible(MainPageLocators.MODAL_CLOSE_BUTTON)
+
+    @allure.step("Проверка видимости деталей ингредиента")
     def is_ingredient_details_visible(self):
         try:
             self.wait_for_element_visible(MainPageLocators.INGREDIENT_DETAILS)
@@ -41,6 +47,7 @@ class MainPage(BasePage):
         except:
             return False
 
+    @allure.step("Получение количества ингредиентов в корзине")
     def get_ingredient_counter(self, index=0):
         ingredients = self.find_elements(MainPageLocators.INGREDIENT_ITEM)
         counters = ingredients[index].find_elements(*MainPageLocators.INGREDIENT_COUNTER)
@@ -48,13 +55,13 @@ class MainPage(BasePage):
             return int(counters[0].text)
         return 0
 
+    @allure.step("Перетаскивание ингредиента в корзину")
     def drag_ingredient_to_basket(self, index=6):
         ingredients = self.find_elements(MainPageLocators.INGREDIENT_ITEM)
         basket = self.find_element(MainPageLocators.ORDER_BASKET)
         action = ActionChains(self.driver)
-        # action.click_and_hold(ingredients[index]).move_to_element(basket).release().perform()
         action.drag_and_drop(ingredients[index], basket).perform()
 
+    @allure.step("Клик на кнопку оформления заказа")
     def click_order_button(self):
         self.click_element(MainPageLocators.PLACE_ORDER_BUTTON)
-
