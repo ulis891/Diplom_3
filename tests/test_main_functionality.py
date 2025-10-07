@@ -49,3 +49,10 @@ class TestMainFunctionality:
         new_count = main_page.get_ingredient_counter(0)
         assert new_count > initial_count
 
+    @allure.feature('Основной функционал')
+    @allure.story('Оформление заказа авторизованным пользователем')
+    def test_place_order_authenticated_user(self, login_user):
+        main_page = MainPage(login_user)
+        main_page.drag_ingredient_to_basket(0)
+        main_page.click_order_button()
+        assert main_page.is_modal_visible()

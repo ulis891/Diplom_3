@@ -52,3 +52,6 @@ class MainPage(BasePage):
         # action.click_and_hold(ingredients[index]).move_to_element(basket).release().perform()
         action.drag_and_drop(ingredients[index], basket).perform()
 
+    def click_order_button(self):
+        self.click_element(MainPageLocators.PLACE_ORDER_BUTTON)
+
