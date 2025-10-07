@@ -1,7 +1,5 @@
-import pytest
 import allure
 from pages.main_page import MainPage
-from pages.login_page import LoginPage
 from pages.profile_page import ProfilePage
 
 
@@ -35,4 +33,3 @@ class TestUserProfile:
         profile_page.click_logout()
         profile_page.wait_for_url_to_contain("login")
         assert "login" in driver.current_url
-

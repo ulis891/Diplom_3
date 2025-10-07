@@ -51,4 +51,3 @@ def user_with_order(login_user):
     main_page.click_order_button()
     main_page.close_modal()
     return driver
-

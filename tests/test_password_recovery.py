@@ -1,4 +1,3 @@
-import pytest
 import allure
 from pages.main_page import MainPage
 from pages.login_page import LoginPage
@@ -14,7 +13,6 @@ class TestPasswordRecovery:
         main_page.click_login_button()
         login_page = LoginPage(driver)
         login_page.click_forgot_password_link()
-        forgot_password_page = ForgotPasswordPage(driver)
         assert "forgot-password" in driver.current_url
 
     @allure.feature('Восстановление пароля')
