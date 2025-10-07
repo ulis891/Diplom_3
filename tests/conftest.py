@@ -52,3 +52,12 @@ def login_user(driver, create_account):
     login_page.login(email, password)
     return driver
 
+@pytest.fixture(scope="function")
+def user_with_order(login_user):
+    driver = login_user
+    main_page = MainPage(driver)
+    main_page.drag_ingredient_to_basket(0)
+    main_page.click_order_button()
+    main_page.close_modal()
+    return driver
+
