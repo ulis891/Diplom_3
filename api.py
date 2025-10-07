@@ -17,10 +17,10 @@ class ApiClient:
             "name": fake.first_name()
         }
 
-    def create_account(self):
-        response = requests.post(self.REGISTER, json=self.user_data()).json()
-        yield response
-        token = response.json().get("accessToken")
-        self.delete_user(token)
+    def create_account(self, data):
+        response = requests.post(self.REGISTER, json=data).json()
+        token = response["accessToken"]
+        return token
+
     def delete_user(self, token):
         return requests.delete(self.USER, headers={"Authorization": token})
