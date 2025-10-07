@@ -1,6 +1,7 @@
-from .base_page import BasePage
 from locators.main_page_locators import MainPageLocators
 from selenium.webdriver.common.action_chains import ActionChains
+from time import sleep
+from .base_page import BasePage
 
 
 class MainPage(BasePage):
@@ -21,6 +22,8 @@ class MainPage(BasePage):
         ingredients[index].click()
 
     def close_modal(self):
+        # self.is_modal_visible()
+        sleep(2)
         self.click_element(MainPageLocators.MODAL_CLOSE_BUTTON)
         self.wait_for_element_not_visible(MainPageLocators.MODAL_CLOSE_BUTTON)
 
