@@ -19,7 +19,7 @@ class TestPasswordRecovery:
     @allure.feature('Восстановление пароля')
     @allure.story('Восстановление пароля с валидным email')
     def test_password_recovery_with_valid_email(self, driver, create_account):
-        email, _ = create_account
+        email, _, _ = create_account
         main_page = MainPage(driver)
         main_page.go_to_site()
         main_page.click_login_button()
@@ -34,7 +34,7 @@ class TestPasswordRecovery:
     @allure.feature('Восстановление пароля')
     @allure.story('Показать/скрыть пароль')
     def test_show_hide_password(self, driver, create_account):
-        email, _ = create_account
+        email, _, _ = create_account
         main_page = MainPage(driver)
         main_page.go_to_site()
         main_page.click_login_button()
