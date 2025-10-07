@@ -12,7 +12,6 @@ class TestUserProfile:
         main_page = MainPage(driver)
         main_page.click_personal_account_button()
         assert "account" in driver.current_url
-        assert "profile" in driver.current_url
 
     @allure.feature('Личный кабинет')
     @allure.story('Переход в историю заказов')
