@@ -22,8 +22,9 @@ class FeedPage(BasePage):
 
     def get_in_progress_orders(self):
         in_progress_section = self.find_element(FeedPageLocators.IN_PROGRESS_SECTION)
-        order_numbers = in_progress_section.find_elements(*FeedPageLocators.ORDER_NUMBER)
+        order_numbers = in_progress_section.find_elements(*FeedPageLocators.ALL_ORDER_NUMBERS)
         return [order.text for order in order_numbers]
 
     def is_order_in_progress(self, order_number):
-        return order_number in self.get_in_progress_orders()
+        orders = self.get_in_progress_orders()
+        return "#0" + str(order_number) in orders

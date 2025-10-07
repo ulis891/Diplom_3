@@ -1,5 +1,4 @@
 import requests
-import allure
 from faker import Faker
 
 
@@ -7,6 +6,9 @@ class ApiClient:
     BASE_URL = "https://stellarburgers.nomoreparties.site/api"
     REGISTER = f"{BASE_URL}/auth/register"
     USER = f"{BASE_URL}/auth/user"
+    INGREDIENTS = f"{BASE_URL}/ingredients"
+    ORDERS = f"{BASE_URL}/orders"
+
 
     @staticmethod
     def user_data():
@@ -24,3 +26,11 @@ class ApiClient:
 
     def delete_user(self, token):
         return requests.delete(self.USER, headers={"Authorization": token})
+
+    def create_order(self, create_account):
+        token = create_account
+        ingredients = requests.get(self.INGREDIENTS).json()["data"]
+        selected_ingredients = ingredients[0]
+        order_data = {"ingredients": selected_ingredients["_id"]}
+        respponse = requests.post(self.ORDERS, headers={"Authorization": token}, json=order_data)
+        return respponse.json()["order"]["number"]

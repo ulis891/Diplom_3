@@ -18,8 +18,9 @@ class MainPageLocators:
     ORDER_BASKET = (By.XPATH, "//ul[contains(@class, 'BurgerConstructor_basket')]")
     PLACE_ORDER_BUTTON = (By.XPATH, "//button[text()='Оформить заказ']")
 
+    NEW_ORDER_DETAILS_MODAL = (By.XPATH, "//div[contains(@class, 'Modal_modal')]//p[contains(text(), 'идентификатор')]")
     MODAL = (By.XPATH, "//div[contains(@class, 'Modal_modal')]")
     MODAL_CLOSE_BUTTON = (By.XPATH, "//button[contains(@class, 'Modal_modal__close')]")
     INGREDIENT_DETAILS = (By.XPATH, "//h2[text()='Детали ингредиента']")
     OVERLAY = (By.XPATH, "//div[contains(@class, 'Modal_modal_overlay')]")
-    ORDER_INDEX = (By.XPATH, "//h2[contains(@class, 'Modal_modal_title')]")
+    ORDER_NUMBER = (By.XPATH, "//p[text()='идентификатор заказа']/preceding-sibling::h2[1]")

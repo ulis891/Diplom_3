@@ -2,6 +2,7 @@ import allure
 from pages.main_page import MainPage
 
 
+@allure.epic('stellarburgers')
 class TestMainFunctionality:
     @allure.feature('Основной функционал')
     @allure.story('Переход в конструктор')
@@ -26,7 +27,7 @@ class TestMainFunctionality:
         main_page.go_to_site()
         main_page.click_ingredient(0)
         assert main_page.is_modal_visible()
-        assert (main_page.is_ingredient_details_visible())
+        assert main_page.is_ingredient_details_visible()
 
     @allure.feature('Основной функционал')
     @allure.story('Открытие деталей ингредиента')

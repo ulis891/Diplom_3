@@ -4,6 +4,7 @@ from pages.login_page import LoginPage
 from pages.forgot_password_page import ForgotPasswordPage
 
 
+@allure.epic('stellarburgers')
 class TestPasswordRecovery:
     @allure.feature('Восстановление пароля')
     @allure.story('Переход на страницу восстановления пароля')

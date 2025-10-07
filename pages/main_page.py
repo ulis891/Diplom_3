@@ -13,6 +13,7 @@ class MainPage(BasePage):
     @allure.step("Клик на кнопку личного кабинета")
     def click_personal_account_button(self):
         self.click_element(MainPageLocators.PERSONAL_ACCOUNT_BUTTON)
+
     @allure.step("Клик на кнопку конструктора")
     def click_constructor_button(self):
         self.click_element(MainPageLocators.CONSTRUCTOR_BUTTON)
@@ -24,6 +25,7 @@ class MainPage(BasePage):
     @allure.step("Клик на ингредиент")
     def click_ingredient(self, index=0):
         ingredients = self.find_elements(MainPageLocators.INGREDIENT_ITEM)
+        sleep(2)
         ingredients[index].click()
 
     def is_modal_visible(self):
@@ -65,3 +67,13 @@ class MainPage(BasePage):
     @allure.step("Клик на кнопку оформления заказа")
     def click_order_button(self):
         self.click_element(MainPageLocators.PLACE_ORDER_BUTTON)
+
+    def get_order_number(self):
+        if self.is_modal_visible():
+            number = self.find_element(MainPageLocators.ORDER_NUMBER).text
+            if number == "9999":
+                sleep(5)
+                number = self.find_element(MainPageLocators.ORDER_NUMBER).text
+            return number
+        else:
+            return None

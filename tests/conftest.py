@@ -8,7 +8,7 @@ from pages.login_page import LoginPage
 
 
 @pytest.fixture(scope="function", params=["chrome", "firefox"])
-def driver():
+def driver(request):
     browser = request.param
     if browser == "chrome":
         options = ChromeOptions()
@@ -24,18 +24,27 @@ def driver():
     driver.quit()
 
 
-@pytest.fixture(scope="function")
+@pytest.fixture(scope="session")
 def create_account():
     client = ApiClient()
     user = client.user_data()
     token = client.create_account(user)
-    yield user["email"], user["password"]
+    yield user["email"], user["password"], token
     client.delete_user(token)
 
 
 @pytest.fixture(scope="function")
+def user_with_order_from_api(create_account):
+    email, password, token = create_account
+    client = ApiClient()
+    order_number = client.create_order(token)
+
+    return email, password, order_number
+
+
+@pytest.fixture(scope="function")
 def login_user(driver, create_account):
-    email, password = create_account
+    email, password, _ = create_account
     main_page = MainPage(driver)
     main_page.go_to_site()
     main_page.click_login_button()
@@ -43,11 +52,13 @@ def login_user(driver, create_account):
     login_page.login(email, password)
     return driver
 
+
 @pytest.fixture(scope="function")
 def user_with_order(login_user):
     driver = login_user
     main_page = MainPage(driver)
     main_page.drag_ingredient_to_basket(0)
     main_page.click_order_button()
+    order_number = main_page.get_order_number()
     main_page.close_modal()
-    return driver
+    return driver, order_number
