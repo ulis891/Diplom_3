@@ -40,6 +40,7 @@ def user_with_order_from_api(create_account):
     order_number = client.create_order(token)
     return email, password, order_number
 
+
 @pytest.fixture(scope="function")
 def login_user_from_api(driver, user_with_order_from_api):
     email, password, order_number = user_with_order_from_api
@@ -49,8 +50,6 @@ def login_user_from_api(driver, user_with_order_from_api):
     login_page = LoginPage(driver)
     login_page.login(email, password)
     return driver, order_number
-
-
 
 
 @pytest.fixture(scope="function")

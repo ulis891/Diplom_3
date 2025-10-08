@@ -1,7 +1,7 @@
 from locators.main_page_locators import MainPageLocators
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
-from .base_page import BasePage
+from pages.base_page import BasePage
 import allure
 
 
@@ -29,8 +29,7 @@ class MainPage(BasePage):
         ingredient_locator = (
         MainPageLocators.INGREDIENT_ITEM[0], f"{MainPageLocators.INGREDIENT_ITEM[1]}[{index + 1}]")
         self.click_element(ingredient_locator)
-        # sleep(2)
-        # ingredients[index].click()
+
 
     def is_modal_visible(self):
         try:
@@ -71,23 +70,10 @@ class MainPage(BasePage):
     def click_order_button(self):
         self.click_element(MainPageLocators.PLACE_ORDER_BUTTON)
 
-    # def get_order_number(self):
-    #     if self.is_modal_visible():
-    #         number = self.find_element(MainPageLocators.ORDER_NUMBER).text
-    #         if number == "9999":
-    #             sleep(5)
-    #             number = self.find_element(MainPageLocators.ORDER_NUMBER).text
-    #         return number
-    #     else:
-    #         return None
+
 
     def get_order_number(self):
         if self.is_modal_visible():
-            # # Начальное значение
-            # number = self.find_element(MainPageLocators.ORDER_NUMBER).text
-            #
-            # # Если значение "9999", ждём, пока оно изменится
-            # if number == "9999":
             WebDriverWait(self.driver, self.time).until(
                 lambda d: self.find_element(MainPageLocators.ORDER_NUMBER).text != "9999"
             )

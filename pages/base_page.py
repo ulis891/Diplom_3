@@ -1,9 +1,6 @@
-from time import sleep
-
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
 from locators.main_page_locators import MainPageLocators
 
 
@@ -32,13 +29,8 @@ class BasePage:
             element = WebDriverWait(self.driver, self.time).until(EC.element_to_be_clickable(locator))
             ActionChains(self.driver).move_to_element(element).click().perform()
             if self.driver.current_url == self.base_url + '/' and locator != MainPageLocators.PLACE_ORDER_BUTTON:
-                # breakpoint()
                 element.click()
-        # WebDriverWait(self.driver, self.time).until(EC.visibility_of_element_located(locator))
-        # element = WebDriverWait(self.driver, self.time).until(EC.element_to_be_clickable(locator))
-        # if self.is_element_blocked(locator):
-        #     raise Exception(f"Элемнт {locator} заблокирован или недоступен")
-        # element.click()
+
 
     def input_text(self, locator, text):
         element = self.find_element(locator)
