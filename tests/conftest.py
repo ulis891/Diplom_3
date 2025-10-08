@@ -38,8 +38,19 @@ def user_with_order_from_api(create_account):
     email, password, token = create_account
     client = ApiClient()
     order_number = client.create_order(token)
-
     return email, password, order_number
+
+@pytest.fixture(scope="function")
+def login_user_from_api(driver, user_with_order_from_api):
+    email, password, order_number = user_with_order_from_api
+    main_page = MainPage(driver)
+    main_page.go_to_site()
+    main_page.click_login_button()
+    login_page = LoginPage(driver)
+    login_page.login(email, password)
+    return driver, order_number
+
+
 
 
 @pytest.fixture(scope="function")

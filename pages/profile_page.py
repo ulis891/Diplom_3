@@ -26,7 +26,7 @@ class ProfilePage(BasePage):
 
     @allure.step("Проверка перехода на странцу профиля")
     def is_profile_page(self):
-        self.wait_for_element_visible(ProfilePageLocators.ORDER_HISTORY_LIST)
+        self.wait_for_element_visible(ProfilePageLocators.ORDER_HISTORY_LINK)
         if "profile" in self.driver.current_url:
             return True
         else:

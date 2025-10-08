@@ -7,4 +7,4 @@ class ProfilePageLocators:
     LOGOUT_BUTTON = (By.XPATH, "//button[text()='Выход']")
     SAVE_BUTTON = (By.XPATH, "//button[text()='Сохранить']")
     CANCEL_BUTTON = (By.XPATH, "//button[text()='Отмена']")
-    ORDER_HISTORY_LIST = (By.XPATH, "//ul[contains(@class, 'OrderHistory_list')")
+    ORDER_HISTORY_LIST = (By.XPATH, "//ul[contains(@class, 'OrderHistory_list')]")

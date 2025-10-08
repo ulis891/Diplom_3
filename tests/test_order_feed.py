@@ -9,9 +9,9 @@ import helper
 class TestOrderFeed:
     @allure.feature('Лента заказов')
     @allure.story('Детали заказа в модальном окне')
-    def test_order_details_modal(self, user_with_order):
-        driver, order = user_with_order
+    def test_order_details_modal(self, driver):
         main_page = MainPage(driver)
+        main_page.go_to_site()
         main_page.click_order_feed_button()
         feed_page = FeedPage(driver)
         feed_page.click_order(0)

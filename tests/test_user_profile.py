@@ -16,8 +16,8 @@ class TestUserProfile:
 
     @allure.feature('Личный кабинет')
     @allure.story('Переход в историю заказов')
-    def test_go_to_order_history(self, user_with_order):
-        driver, _ = user_with_order
+    def test_go_to_order_history(self, login_user_from_api):
+        driver, _ = login_user_from_api
         main_page = MainPage(driver)
         main_page.click_personal_account_button()
         profile_page = ProfilePage(driver)

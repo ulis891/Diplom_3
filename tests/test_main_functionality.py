@@ -30,7 +30,7 @@ class TestMainFunctionality:
         assert main_page.is_ingredient_details_visible()
 
     @allure.feature('Основной функционал')
-    @allure.story('Открытие деталей ингредиента')
+    @allure.story('Закрытие деталей ингредиента')
     def test_close_modal(self, driver):
         main_page = MainPage(driver)
         main_page.go_to_site()
