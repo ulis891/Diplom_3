@@ -11,7 +11,8 @@ class TestUserProfile:
         driver = login_user
         main_page = MainPage(driver)
         main_page.click_personal_account_button()
-        assert "account" in driver.current_url
+        prfile_page = ProfilePage(driver)
+        assert prfile_page.is_profile_page()
 
     @allure.feature('Личный кабинет')
     @allure.story('Переход в историю заказов')
@@ -21,7 +22,7 @@ class TestUserProfile:
         main_page.click_personal_account_button()
         profile_page = ProfilePage(driver)
         profile_page.click_order_history()
-        assert "order-history" in driver.current_url
+        assert profile_page.is_order_history_visible()
 
     @allure.feature('Личный кабинет')
     @allure.story('Выход из аккаунта')
@@ -32,4 +33,5 @@ class TestUserProfile:
         profile_page = ProfilePage(driver)
         profile_page.click_logout()
         profile_page.wait_for_url_to_contain("login")
-        assert "login" in driver.current_url
+        assert profile_page.is_logged_out()
+

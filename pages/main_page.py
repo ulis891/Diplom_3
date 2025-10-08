@@ -77,3 +77,15 @@ class MainPage(BasePage):
             return number
         else:
             return None
+
+    @allure.step("Отображение конструктора")
+    def is_constructor(self):
+        return self.driver.current_url == self.base_url + "/"
+
+    @allure.step("Отображение ленты заказов")
+    def is_order_feed(self):
+        if self.driver.current_url == self.base_url + "/feed":
+            return True
+        else:
+            return False
+

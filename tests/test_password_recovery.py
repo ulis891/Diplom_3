@@ -14,7 +14,8 @@ class TestPasswordRecovery:
         main_page.click_login_button()
         login_page = LoginPage(driver)
         login_page.click_forgot_password_link()
-        assert "forgot-password" in driver.current_url
+        forgot_password_page = ForgotPasswordPage(driver)
+        assert forgot_password_page.check_forgot_password_page()
 
     @allure.feature('Восстановление пароля')
     @allure.story('Восстановление пароля с валидным email')
@@ -29,7 +30,7 @@ class TestPasswordRecovery:
         forgot_password_page.input_email(email)
         forgot_password_page.click_restore_button()
         forgot_password_page.wait_for_url_to_contain("reset-password")
-        assert "reset-password" in driver.current_url
+        assert forgot_password_page.check_reset_password_page()
 
     @allure.feature('Восстановление пароля')
     @allure.story('Показать/скрыть пароль')

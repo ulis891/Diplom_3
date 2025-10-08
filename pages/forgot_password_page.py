@@ -28,3 +28,18 @@ class ForgotPasswordPage(BasePage):
     def restore_password(self, email):
         self.input_email(email)
         self.click_restore_button()
+
+    @allure.step("Проверка перехода на страницу востановления пароля")
+    def check_forgot_password_page(self):
+        if "forgot-password" in self.driver.current_url:
+            return True
+        else:
+            return False
+
+
+    @allure.step("Проверка перехода на страницу ввода нового пароля")
+    def check_reset_password_page(self):
+        if "reset-password" in self.driver.current_url:
+            return True
+        else:
+            return False

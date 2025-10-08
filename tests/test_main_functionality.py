@@ -10,7 +10,7 @@ class TestMainFunctionality:
         main_page = MainPage(driver)
         main_page.go_to_site()
         main_page.click_constructor_button()
-        assert driver.current_url == main_page.base_url + "/"
+        assert main_page.is_constructor()
 
     @allure.feature('Основной функционал')
     @allure.story('Переход в ленту заказов')
@@ -18,7 +18,7 @@ class TestMainFunctionality:
         main_page = MainPage(driver)
         main_page.go_to_site()
         main_page.click_order_feed_button()
-        assert "feed" in driver.current_url
+        assert main_page.is_order_feed()
 
     @allure.feature('Основной функционал')
     @allure.story('Открытие деталей ингредиента')

@@ -13,12 +13,21 @@ class ProfilePage(BasePage):
 
     @allure.step("Проверка видимости истории заказов")
     def is_order_history_visible(self):
+        self.wait_for_element_visible(ProfilePageLocators.ORDER_HISTORY_LIST)
         try:
-            self.wait_for_element_visible(ProfilePageLocators.ORDER_HISTORY_LIST)
-            return True
+            if "order-history" in self.driver.current_url:
+                return True
         except:
-            return False
+                return False
 
     @allure.step("Проверка выхода из профиля")
     def is_logged_out(self):
         return "login" in self.driver.current_url
+
+    @allure.step("Проверка перехода на странцу профиля")
+    def is_profile_page(self):
+        self.wait_for_element_visible(ProfilePageLocators.ORDER_HISTORY_LIST)
+        if "profile" in self.driver.current_url:
+            return True
+        else:
+            return False
